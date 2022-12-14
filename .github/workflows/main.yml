@@ -5,6 +5,15 @@ on:
       - "main"
   workflow_dispatch:
     inputs:
+      environment:
+        description: "Cluster environment"
+        required: true
+        type: choice
+        options:
+          - "dev"
+          - "playground"
+          - "prod"
+          - "c2"
       target:
         description: "Target"
         required: true
@@ -13,7 +22,6 @@ on:
         description: "Destination"
         required: true
         type: string
-        default: default
 jobs:
   copy:
     runs-on: ubuntu-latest
@@ -25,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: copy file
-        run: ARGS="" TARGET="${{ inputs.target }}" DEST="${{ inputs.destination }}" .github/workflows/scripts/copy.sh
+        run: ARGS="-r" TARGET="./terraform/clusters/{{ inputs.environment }}/${{ inputs.target }}" DEST="./terraform/clusters/{{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
       - name: Git push
         run: |
