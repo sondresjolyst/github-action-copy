@@ -13,6 +13,8 @@ on:
         description: "Destination"
         required: true
         type: string
+        options:
+          - "test"
 jobs:
   copy:
     runs-on: ubuntu-latest
@@ -24,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: copy file
-        run: ARGS="" TARGET="${{ github.event.inputs.target }}" DEST="${{ github.event.inputs.destination }}" .github/workflows/scripts/copy.sh
+        run: ARGS="" TARGET="${{ inputs.target }}" DEST="${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
       - name: Git push
         run: |
