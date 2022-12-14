@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: copy file
-        run: ARGS="" TARGET="./test/original/foo.txt" DEST="./test/foo-copy.txt" .github/workflows/scripts/copy.sh
+        run: ARGS="" TARGET="./tests/original/foo.txt" DEST="./tests/foo-copy.txt" .github/workflows/scripts/copy.sh
