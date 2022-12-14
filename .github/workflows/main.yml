@@ -10,4 +10,4 @@ jobs:
         uses: sondresjolyst/github-action-copy@master
         with:
           source: "tests/original/foo.txt"
-          target: "foo-copy.txt"
+          target: "tests/foo-copy.txt"
