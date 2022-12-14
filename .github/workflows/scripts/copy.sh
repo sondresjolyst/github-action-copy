@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cp $ARGS "${TARGET}" "${DEST}"
+cp $ARGS "${TARGET}" "${DESTINATION}"
