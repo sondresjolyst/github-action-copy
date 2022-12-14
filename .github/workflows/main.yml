@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: copy file
-        run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DEST="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
+        run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DESTINATION="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
       - name: Git push
         run: |
