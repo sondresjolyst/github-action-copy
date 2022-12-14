@@ -13,8 +13,7 @@ on:
         description: "Destination"
         required: true
         type: string
-        options:
-          - "test"
+        default: default
 jobs:
   copy:
     runs-on: ubuntu-latest
