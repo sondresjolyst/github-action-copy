@@ -3,7 +3,19 @@ on: [push]
 jobs:
   copy:
     runs-on: ubuntu-latest
+    env:
+      USER_NAME: Automatic
+      USER_EMAIL: radix@statoilsrm.onmicrosoft.com
+      COMMIT_MESSAGE: copy file
+      COMMIT_AUTHOR: bot
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: copy file
         run: ARGS="" TARGET="./tests/original/foo.txt" DEST="./tests/foo-copy.txt" .github/workflows/scripts/copy.sh
+
+      - name: Git push
+        run: |
+          git config --global user.name "${{ env.USER_NAME }}"
+          git config --global user.email "${{ env.USER_EMAIL }}"
+          git commit -a -m "${{ env.COMMIT_MESSAGE }}"
+          git push
