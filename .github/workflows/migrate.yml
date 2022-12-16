@@ -1,9 +1,6 @@
 name: Migrate cluster
 on:
   pull_request:
-    branches:
-      - master
-      - fork-radix-platform/master
   workflow_dispatch:
     inputs:
       environment:
