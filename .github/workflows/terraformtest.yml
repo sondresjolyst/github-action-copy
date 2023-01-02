@@ -76,7 +76,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ matrix.filename }}
+        working-directory: ${{ inputs.working_directory }}
 
     # Configure OIDC authentication to Azure using environment variables.
     # Required by the AzureRM backend and provider.
@@ -87,7 +87,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       container_name: tfstate
-      key: ${{ inputs.radix_environment }}.${{ matrix.filename }}.terraform.tfstate
+      key: ${{ inputs.radix_environment }}.${{ inputs.cluster_name }}.terraform.tfstate
       resource_group_name: s941-tfstate
       storage_account_name: radixinfra${{ inputs.radix_environment }}
 
@@ -107,19 +107,19 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform -chdir=${{ matrix.folder }} init \
+          terraform init \
           -backend-config='container_name=${{ env.container_name }}' \
           -backend-config='key=${{ env.key }}' \
           -backend-config='resource_group_name=${{ env.resource_group_name }}' \
           -backend-config='storage_account_name=${{ env.storage_account_name }}'
 
       - name: Terraform Validate
-        run: terraform -chdir=${{ matrix.folder }} validate
+        run: terraform validate
 
       - name: Terraform Plan
         if: github.event_name == 'pull_request'
-        run: terraform -chdir=${{ matrix.folder }} plan
+        run: terraform plan
 
       - name: Terraform Apply
         if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
-        run: terraform -chdir=${{ matrix.folder }} apply -auto-approve
+        run: terraform apply -auto-approve
