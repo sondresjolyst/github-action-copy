@@ -1,0 +1,13 @@
+name: list-test
+on:
+  pull_request:
+jobs:
+  list-files:
+    name: list-files
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$(ls manifests/*.yml | jq -R -s -c 'split("\n")[:-1]')"
