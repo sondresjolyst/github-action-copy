@@ -26,7 +26,7 @@ jobs:
   terraform:
     needs: list-files
     name: Terraform
-    uses: ./.github/workflows/terraformtest.yml@master
+    uses: ./.github/workflows/terraformtest.yml@test
     with:
       cluster_name: ${{ matrix.filename }}
       environment: operations
