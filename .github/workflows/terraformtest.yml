@@ -69,10 +69,6 @@ jobs:
       id-token: write
       contents: read
 
-    strategy:
-      matrix:
-        filename: ${{ fromJson(inputs.filenames) }}
-
     defaults:
       run:
         shell: bash
