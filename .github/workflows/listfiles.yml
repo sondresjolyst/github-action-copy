@@ -1,6 +1,7 @@
 name: list-test
 on:
   push:
+  pull_request_target:
 jobs:
   list-files:
     name: list-files
