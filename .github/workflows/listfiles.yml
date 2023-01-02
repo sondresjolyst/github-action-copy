@@ -13,3 +13,12 @@ jobs:
       - uses: actions/checkout@v3
       - id: set-matrix
         run: echo "{matrix}={$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')} >> $GITHUB_OUTPUT"
+  check:
+    needs: list-files
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            manifest: ${{ fromJson(needs.list-files.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v2   
+      - run: echo ${{ matrix.manifest }}
