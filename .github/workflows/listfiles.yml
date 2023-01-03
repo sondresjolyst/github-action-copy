@@ -1,6 +1,7 @@
 name: list-test
 on:
   pull_request:
+    types: [labeled, opened, synchronize, reopened]
 jobs:
   get-radix_environment:
     name: get-radix_environment
