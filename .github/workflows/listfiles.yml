@@ -12,7 +12,7 @@ jobs:
       path: terraform/clusters/dev
     steps:
       - uses: actions/checkout@v3
-      - run: echo "{matrix}={$(ls | jq -R -s -c 'split("\n")[:-1]')}" >> $GITHUB_OUTPUT
+      - run: echo $(ls | jq -R -s -c 'split("\n")[:-1]')
         
       # - name: set-matrix
       #   uses: actions/checkout@v3
