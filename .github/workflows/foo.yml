@@ -1,11 +1,11 @@
-name: test
-on:
-  pull_request_target:
-jobs:
-  foo:
-    name: foo
-    runs-on: ubuntu-latest
-    steps:
-      - name: testing
-        run: |
-          echo test
+# name: test
+# on:
+#   pull_request_target:
+# jobs:
+#   foo:
+#     name: foo
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: testing
+#         run: |
+#           echo test
