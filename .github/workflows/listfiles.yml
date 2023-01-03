@@ -11,17 +11,27 @@ jobs:
     env:
       path: terraform/clusters/dev
     steps:
-      - uses: actions/checkout@v3
-      - id: set-matrix
+      - name: Set matrix
+        id: set-matrix
         run: echo "{matrix}={$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')}" >> $GITHUB_OUTPUT
-  foo:
-    needs: list-files
-    name: list-output
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - id: set-matrix
-        run: echo ${{ needs.list-files.outputs.matrix }}
+      - name: Get matrix
+        run: echo {{ steps.set-matrix.outputs.matrix }}
+        
+      # - name: set-matrix
+      #   uses: actions/checkout@v3
+      #   run: echo "{matrix}={$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')}" >> $GITHUB_OUTPUT
+
+      # - name: test
+      #   uses: actions/checkout@v3
+      #   run: echo {{ steps.set-matrix.outputs.matrix }}
+  # foo:
+  #   needs: list-files
+  #   name: list-output
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - id: set-matrix
+  #       run: echo ${{ needs.list-files.outputs.matrix }}
   # check:
   #   needs: list-files
   #   runs-on: ubuntu-latest
