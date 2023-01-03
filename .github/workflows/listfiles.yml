@@ -14,19 +14,21 @@ jobs:
         #   GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           x="$(echo '${{ toJson(github.event.pull_request.labels.*.name) }}' | jq -c)"
-          echo "labels: $x"
-  # list-files:
-  #   needs: get-radix_environment
-  #   name: list-files
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     matrix: ${{ steps.set-matrix.outputs.list }}
-  #   env:
-  #     path: terraform/clusters/${{ needs.get-radix_environment.outputs.radix_environment }}
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - id: set-matrix
-  #       run: echo "list=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+          if [[ "$(echo "$x" | jq -e ". | any(. == "dev")")" == true ]]; then
+            echo "radix_environment=dev" >> $GITHUB_OUTPUT
+          fi
+  list-files:
+    needs: get-radix_environment
+    name: list-files
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.list }}
+    env:
+      path: terraform/clusters/${{ needs.get-radix_environment.outputs.radix_environment }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "list=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
   # terraform:
   #   needs: list-files
   #   name: Terraform
