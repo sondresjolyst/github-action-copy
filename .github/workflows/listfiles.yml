@@ -14,9 +14,7 @@ jobs:
         #   GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           x="$(echo '${{ toJson(github.event.pull_request.labels.*.name) }}' | jq -c)"
-          # "${{ toJson(github.event.pull_request.labels.*.name) }}"
           echo "labels: $x"
-          # echo "$GITHUB_CONTEXT"
   # list-files:
   #   needs: get-radix_environment
   #   name: list-files
