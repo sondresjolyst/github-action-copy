@@ -12,8 +12,9 @@ jobs:
       path: terraform/clusters/dev
     steps:
       - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "list=test" >> $GITHUB_OUTPUT
       # - run: echo "list=$(ls | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
-      - run: echo "list=test" >> $GITHUB_OUTPUT
       # - name: set-matrix
       #   uses: actions/checkout@v3
       #   run: echo "{matrix}={$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')}" >> $GITHUB_OUTPUT
