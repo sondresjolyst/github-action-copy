@@ -14,15 +14,23 @@ jobs:
       - uses: actions/checkout@v3
       - id: set-matrix
         run: echo "{matrix}={$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')}" >> $GITHUB_OUTPUT
-  check:
+  foo:
     needs: list-files
+    name: list-output
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        filename: ${{ fromJson(needs.list-files.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v3
-      - run: echo "{test}={${{ matrix.filename }}} >> $GITHUB_OUTPUT"
+      - id: set-matrix
+        run: echo ${{ needs.list-files.outputs.matrix }}
+  # check:
+  #   needs: list-files
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       filename: ${{ fromJson(needs.list-files.outputs.matrix) }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: echo "{test}={${{ matrix.filename }}} >> $GITHUB_OUTPUT"
   # terraform:
   #   needs: list-files
   #   name: Terraform
