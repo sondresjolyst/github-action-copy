@@ -9,9 +9,10 @@ jobs:
       radix_environment: ${{ steps.radix_environment.outputs.radix_environment }}
     steps:
       - id: radix_environment
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          labels=$(echo ${{ toJson(github) }} | jq -R -s)
-          echo $(labels[*])
+          echo "$GITHUB_CONTEXT"
   # list-files:
   #   needs: get-radix_environment
   #   name: list-files
