@@ -48,13 +48,13 @@ jobs:
       matrix:
         filename: ${{ fromJson(needs.list-files.outputs.matrix) }}
     with:
-      cluster_name: ${{ matrix.list }}
+      cluster_name: ${{ matrix.filename }}
       branch: master
       environment: operations
       radix_environment: dev
       terraform_version: ~1.3.0
-      working_directory: terraform/clusters/dev/${{ matrix.list }}
-      filenames: ${{ matrix.list }}
+      working_directory: terraform/clusters/dev/${{ matrix.filename }}
+      filenames: ${{ matrix.filename }}
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
