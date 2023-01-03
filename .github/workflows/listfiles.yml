@@ -21,7 +21,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.list }}
     env:
       radix_environment: ${{ needs.get-radix_environment.outputs.radix_environment }}
-      path: terraform/clusters/${{ env.radix_environment }}
+      path: terraform/clusters/${{ radix_environment }}
     steps:
       - uses: actions/checkout@v3
       - id: set-matrix
