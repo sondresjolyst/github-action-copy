@@ -13,7 +13,7 @@ jobs:
         # env:
         #   GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          x="$(echo "${{ toJson(github.event.pull_request.labels.*.name) }}" | jq -c)"
+          x="$(echo '${{ toJson(github.event.pull_request.labels.*.name) }}' | jq -c)"
           # "${{ toJson(github.event.pull_request.labels.*.name) }}"
           echo "labels: $x"
           # echo "$GITHUB_CONTEXT"
