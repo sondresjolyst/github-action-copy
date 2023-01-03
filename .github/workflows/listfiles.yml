@@ -20,7 +20,6 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.list }}
     env:
-      radix_environment: ${{ needs.get-radix_environment.outputs.radix_environment }}
       path: terraform/clusters/${{ needs.get-radix_environment.outputs.radix_environment }}
     steps:
       - uses: actions/checkout@v3
@@ -36,9 +35,9 @@ jobs:
     with:
       cluster_name: ${{ matrix.filename }}
       environment: operations
-      radix_environment: ${{ env.radix_environment }}
+      radix_environment: ${{ needs.get-radix_environment.outputs.radix_environment }}
       terraform_version: ~1.3.0
-      working_directory: terraform/clusters/${{ env.radix_environment }}/${{ matrix.filename }}
+      working_directory: terraform/clusters/${{ needs.get-radix_environment.outputs.radix_environment }}/${{ matrix.filename }}
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
