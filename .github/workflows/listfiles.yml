@@ -14,7 +14,7 @@ jobs:
         #   GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           x="$(echo '${{ toJson(github.event.pull_request.labels.*.name) }}' | jq -c)"
-          if [[ "$(echo "$x" | jq -e ". | any(. == "dev")")" == true ]]; then
+          if [[ "$(echo "$x" | jq -e '. | any(. == "dev")')" == true ]]; then
             echo "radix_environment=dev" >> $GITHUB_OUTPUT
           fi
   list-files:
