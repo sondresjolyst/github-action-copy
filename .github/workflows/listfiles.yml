@@ -49,6 +49,7 @@ jobs:
         filename: ${{ fromJson(needs.list-files.outputs.matrix) }}
     with:
       cluster_name: ${{ matrix.list }}
+      branch: master
       environment: operations
       radix_environment: dev
       terraform_version: ~1.3.0
