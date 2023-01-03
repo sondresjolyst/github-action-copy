@@ -29,7 +29,6 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
     # env:
       # USER_NAME: Automatic
       # USER_EMAIL: radix@statoilsrm.onmicrosoft.com
