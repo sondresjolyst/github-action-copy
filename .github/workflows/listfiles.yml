@@ -10,7 +10,7 @@ jobs:
     steps:
       - id: radix_environment
         run: |
-          labels=${{ github.event.pull_request.labels }}
+          labels=$(${{ github.event.pull_request.labels }})
           echo $(labels[*])
   # list-files:
   #   needs: get-radix_environment
