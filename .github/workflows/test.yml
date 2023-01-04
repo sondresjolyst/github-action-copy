@@ -1,0 +1,14 @@
+name: Test
+on:
+  workflow_run:
+    workflows: [Migrate cluster]
+    types: [completed]
+    branches: [new-cluster]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copy cluster
+        run: echo "test"
