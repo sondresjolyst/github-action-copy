@@ -11,3 +11,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Copy cluster
         run: echo "test"
+
+      - name: Create Pull Request
+        id: cpr
+        uses: actions/checkout@v3
+        with:
+          repository: "new-cluster"
