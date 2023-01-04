@@ -16,7 +16,7 @@ jobs:
         id: cpr
         uses: actions/checkout@v3
         with:
-          repository: "new-cluster"
+          ref: 'new-cluster'
         env: 
           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
           CI_COMMIT_AUTHOR: Continuous Integration
