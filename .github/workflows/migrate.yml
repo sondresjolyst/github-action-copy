@@ -39,7 +39,7 @@ jobs:
         run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DESTINATION="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
       - name: github actions
-        run: echo "${{ toJson(github) }}"
+        run: echo "${{ toJson(github.workflow) }}"
 
       - name: Create Pull Request
         id: cpr
@@ -48,14 +48,22 @@ jobs:
           assignees: equinor/omnia-radix
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           body: |
-            Automated PR created by 
+            **${{ github.workflow }}**
+
+            Target: ${{ inputs.target }}
+            Destination: ${{ inputs.destination }}
+
+            Label PR with `deploy` to start terraform planing actions.
+
+            `Merge pull request` to apply terraform
+
+            PR created by ${{ github.workflow }} 
           branch: new-cluster
           commit-message: New cluster
           committer: GitHub <noreply@github.com>
           delete-branch: true
           labels: |
-            migrate
             ${{ inputs.environment }}
           reviewers: equinor/omnia-radix
-          title: '[migrate] Target: ${{ inputs.target }}, Destination: ${{ inputs.destination }}'
+          title: '[Migrate] Target: ${{ inputs.target }}, Destination: ${{ inputs.destination }}'
           token: ${{ github.token }}
