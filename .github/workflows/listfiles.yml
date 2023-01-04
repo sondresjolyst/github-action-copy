@@ -38,7 +38,7 @@ jobs:
   Terraform:
     needs: [List_files, Get_radix_environment]
     name: Terraform
-    uses: ./.github/workflows/terraformtest.yml
+    uses: ./.github/workflows/terraform.yml
     strategy:
       matrix:
         filename: ${{ fromJson(needs.List_files.outputs.matrix) }}
