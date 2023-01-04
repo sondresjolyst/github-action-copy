@@ -1,10 +1,9 @@
 name: Test
 on:
   workflow_run:
-    workflows: [Migrate cluster, migrate]
+    workflows:
+      - Migrate cluster
     types: [completed]
-    branches: [new-cluster]
-
 jobs:
   test:
     runs-on: ubuntu-latest
