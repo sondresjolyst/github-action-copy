@@ -42,15 +42,15 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.PAT }}
-          commit-message: New cluster
-          committer: GitHub <noreply@github.com>
+          assignees: equinor/omnia-radix
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: new-cluster
+          commit-message: New cluster
+          committer: GitHub <noreply@github.com>
           delete-branch: true
-          title: '[migrate] Target: ${{ inputs.target }}, Destination: ${{ inputs.destination }}'
-          assignees: equinor/omnia-radix
-          reviewers: equinor/omnia-radix
           labels: |
             migrate
             ${{ inputs.environment }}
+          reviewers: equinor/omnia-radix
+          title: '[migrate] Target: ${{ inputs.target }}, Destination: ${{ inputs.destination }}'
+          token: ${{ github.token }}
