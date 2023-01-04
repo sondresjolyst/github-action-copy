@@ -39,7 +39,7 @@ jobs:
         run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DESTINATION="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
       - name: github actions
-        run: echo ${{ toJson(github) }}
+        run: echo "${{ toJson(github) }}"
 
       - name: Create Pull Request
         id: cpr
