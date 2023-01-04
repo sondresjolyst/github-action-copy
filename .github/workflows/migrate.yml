@@ -26,20 +26,12 @@ on:
         default: weekly-02
 
 jobs:
-  migrate:
+  Migrate:
     runs-on: ubuntu-latest
-    # env:
-      # USER_NAME: Automatic
-      # USER_EMAIL: radix@statoilsrm.onmicrosoft.com
-      # COMMIT_MESSAGE: Copy cluster
-      # COMMIT_AUTHOR: radix
     steps:
       - uses: actions/checkout@v3
       - name: Copy cluster
         run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DESTINATION="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
-
-      - name: github actions
-        run: echo "${{ toJson(github.workflow) }}"
 
       - name: Create Pull Request
         id: cpr
@@ -48,18 +40,16 @@ jobs:
           assignees: equinor/omnia-radix
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           body: |
-            **${{ github.workflow }}**
+            **${{ github.workflow }}:**
 
             Target: ${{ inputs.target }}
             Destination: ${{ inputs.destination }}
 
-            Label PR with `deploy` to start terraform planing actions.
+            Label/Relabel PR with `deploy` to start terraform planing actions.
 
-            `Merge pull request` to apply terraform
-
-            PR created by ${{ github.workflow }} 
-          branch: new-cluster
-          commit-message: New cluster
+            `Merge pull request` to apply terraform.
+          branch: migrate_${{ inputs.target }}_${{ inputs.destination }}
+          commit-message: "[Migrate] Copy: ${{ inputs.target }} -> ${{ inputs.destination }}"
           committer: GitHub <noreply@github.com>
           delete-branch: true
           labels: |
