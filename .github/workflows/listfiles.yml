@@ -6,7 +6,7 @@ on:
     types: [labeled, opened, synchronize, reopened]
 jobs:
   Get_radix_environment:
-    if: contains(github.event.pull_request.labels.*.name, $LABEL)
+    if: contains(github.event.pull_request.labels.*.name, "${{ env.LABEL }}")
     name: Get radix environment
     runs-on: ubuntu-latest
     outputs:
