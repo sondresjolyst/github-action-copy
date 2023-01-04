@@ -1,12 +1,12 @@
 name: List files
 env:
-  label: deploy
+  LABEL: deploy
 on:
   pull_request:
     types: [labeled, opened, synchronize, reopened]
 jobs:
   Get_radix_environment:
-    if: contains(github.event.pull_request.labels.*.name, '${{ env.label }}')
+    if: contains(github.event.pull_request.labels.*.name, '$LABEL')
     name: Get radix environment
     runs-on: ubuntu-latest
     outputs:
