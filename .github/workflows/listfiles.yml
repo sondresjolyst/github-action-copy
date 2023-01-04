@@ -6,7 +6,7 @@ env:
   LABEL: deploy
 jobs:
   Get_radix_environment:
-    if: contains(toJson(github.event.pull_request.labels.*.name), ${{ LABEL }}) == true
+    if: contains(toJson(github.event.pull_request.labels.*.name), LABEL) == true
     name: Get radix environment
     runs-on: ubuntu-latest
     env:
