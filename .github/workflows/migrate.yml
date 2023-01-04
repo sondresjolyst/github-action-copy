@@ -38,12 +38,17 @@ jobs:
       - name: Copy cluster
         run: ARGS="-r" TARGET="./terraform/clusters/${{ inputs.environment }}/${{ inputs.target }}" DESTINATION="./terraform/clusters/${{ inputs.environment }}/${{ inputs.destination }}" .github/workflows/scripts/copy.sh
 
+      - name: github actions
+        run: echo ${{ toJson(github) }}
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: equinor/omnia-radix
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          body: |
+            Automated PR created by 
           branch: new-cluster
           commit-message: New cluster
           committer: GitHub <noreply@github.com>
