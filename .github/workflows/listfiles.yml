@@ -31,7 +31,7 @@ jobs:
       - id: test
         run: |
           output="$(echo '${{ toJson(github) }}')"
-          echo $output
+          echo "$output" | jq
   # List_files:
   #   needs: Get_radix_environment
   #   name: List files
