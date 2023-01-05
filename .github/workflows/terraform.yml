@@ -1,4 +1,4 @@
-# Install Terraform, configure OpenID Connect (OIDC) authentication to Azure, create a Terraform plan, and apply the plan on push to branch 'main'.
+# Install Terraform, configure OpenID Connect (OIDC) authentication to Azure, create a Terraform plan, and apply the plan on push to branch 'master'.
 
 on:
   workflow_call:
@@ -102,8 +102,8 @@ jobs:
 
       - name: Terraform Plan
         if: github.event_name == 'pull_request'
-        run: terraform plan --var-file=../../../radix-zone/radix_zone_dev.tfvars -lock=false
+        run: terraform plan --var-file=../../../radix-zone/radix_zone_dev.tfvars
 
-      # - name: Terraform Apply
-      #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
-      #   run: terraform apply --var-file=../../../radix-zone/radix_zone_dev.tfvars -auto-approve
+      - name: Terraform Apply
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
+        run: terraform apply --var-file=../../../radix-zone/radix_zone_dev.tfvars -auto-approve
