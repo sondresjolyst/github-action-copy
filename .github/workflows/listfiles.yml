@@ -13,7 +13,7 @@ jobs:
     name: Get radix environment
     runs-on: ubuntu-latest
     outputs:
-      radix_environment: ${{ steps.radix_environment.outputs.radix_environment }}
+      radix_environment: ${{ steps.set-matrix.outputs.radix_environment }}
     env:
       path: terraform/clusters
     steps:
