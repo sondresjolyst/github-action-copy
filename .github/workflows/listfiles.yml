@@ -20,30 +20,32 @@ jobs:
       - uses: actions/checkout@v3
       - id: set-matrix
         run: echo "radix_environment=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
-
-  test:
+  # test:
+  #   needs: Get_radix_environment
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       radix_environment: ${{ fromJson(needs.Get_radix_environment.outputs.radix_environment) }}
+  #   steps:
+  #     - id: test
+  #       run: |
+  #         echo "${{ matrix.radix_environment }}"
+  List_files:
     needs: Get_radix_environment
-    name: Test
+    name: List files
     runs-on: ubuntu-latest
     strategy:
       matrix:
         radix_environment: ${{ fromJson(needs.Get_radix_environment.outputs.radix_environment) }}
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.file_list }}
+    env:
+      path: terraform/clusters/${{ matrix.radix_environment }}
     steps:
-      - id: test
-        run: |
-          echo "${{ matrix.radix_environment }}"
-  # List_files:
-  #   needs: Get_radix_environment
-  #   name: List files
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     matrix: ${{ steps.set-matrix.outputs.file_list }}
-  #   env:
-  #     path: terraform/clusters/${{ needs.Get_radix_environment.outputs.radix_environment }}
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - id: set-matrix
-  #       run: echo "file_list=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "file_list=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
   # Terraform:
   #   needs: [List_files, Get_radix_environment]
   #   name: Terraform
