@@ -43,6 +43,18 @@ on:
         description: The ID of the Azure tenant to create the resources in.
         required: true
 
+    outputs:
+      tf-wd: 
+        value: ${{ inputs.working_directory }}
+      tf-fmt: 
+        value: ${{ steps.fmt.outcome }}
+      tf-init: 
+        value: ${{ steps.init.outcome }}
+      tf-validate: 
+        value: ${{ steps.validate.outputs.stdout }}
+      tf-plan: 
+        value: ${{ steps.plan.outcome }}
+
 jobs:
   Terraform:
     name: Terraform
@@ -77,6 +89,12 @@ jobs:
       resource_group_name: s941-tfstate
       storage_account_name: radixinfra${{ inputs.radix_environment }}
 
+    outputs:
+      tf-fmt: ${{ steps.fmt.outcome }}
+      tf-init: ${{ steps.init.outcome }}
+      tf-validate: ${{ steps.validate.outputs.stdout }}
+      tf-plan: ${{ steps.plan.outcome }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -108,36 +126,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan --var-file=../../../radix-zone/radix_zone_dev.tfvars -lock=false
 
-      # - name: Add PR comment
-      #   uses: peter-evans/create-or-update-comment@v2
-      #   if: github.event_name == 'pull_request'
-      #   with:
-      #     issue-number: ${{ github.event.pull_request.number }}
-      #     body: |
-      #       #### Directory: \`${{ inputs.working_directory }}\`
-      #       #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-      #       #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-      #       #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-      #       #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-
-      #       <details><summary>Show Plan</summary>
-
-      #       \`\`\`${{ steps.plan.outputs.stdout }}\`\`\`
-
-      #       </details>
-
-      #       *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ inputs.working_directory }}\`, Workflow: \`${{ github.workflow }}\`*`
-      
-      - name: Add PR comment
-        uses: peter-evans/create-or-update-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ```
-            test
-            ```
-          token: ${{ github.token }}
       # - name: Terraform Apply
       #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
       #   run: terraform apply --var-file=../../../radix-zone/radix_zone_dev.tfvars -auto-approve -lock=false

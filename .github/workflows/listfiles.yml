@@ -64,3 +64,28 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  Add_PR_Comment:
+    needs: [Terraform]
+    name: Add PR comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add PR comment
+        uses: peter-evans/create-or-update-comment@v2
+        if: github.event_name == 'pull_request'
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            #### Directory: \`${{ needs.Terraform.outputs.tf-wd }}\`
+            #### Terraform Format and Style 🖌\`${{ needs.Terraform.outputs.tf-fmt }}\`
+            #### Terraform Initialization ⚙️\`${{ needs.Terraform.outputs.tf-init }}\`
+            #### Terraform Validation 🤖${{ needs.Terraform.outputs.tf-validate }}
+            #### Terraform Plan 📖\`${{ needs.Terraform.outputs.tf-plan }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`${{ needs.Terraform.outputs.tf-plan }}\`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ needs.Terraform.outputs.tf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
+      
