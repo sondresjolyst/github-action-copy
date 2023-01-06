@@ -47,13 +47,13 @@ on:
       tf-wd: 
         value: ${{ inputs.working_directory }}
       tf-fmt: 
-        value: ${{ jobs.Teraform.outputs.tf-fmt }}
+        value: ${{ jobs.Terraform.outputs.tf-fmt }}
       tf-init: 
-        value: ${{ jobs.Teraform.outputs.tf-init }}
+        value: ${{ jobs.Terraform.outputs.tf-init }}
       tf-validate: 
-        value: ${{ jobs.Teraform.outputs.tf-validate }}
+        value: ${{ jobs.Terraform.outputs.tf-validate }}
       tf-plan: 
-        value: ${{ jobs.Teraform.outputs.tf-plan }}
+        value: ${{ jobs.Terraform.outputs.tf-plan }}
 
 jobs:
   Terraform:
