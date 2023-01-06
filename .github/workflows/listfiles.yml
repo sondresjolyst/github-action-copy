@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: test
         run: |
-          echo "${{ matrix.filename }}"
+          echo "${{ matrix.radix_environment }}"
   # List_files:
   #   needs: Get_radix_environment
   #   name: List files
