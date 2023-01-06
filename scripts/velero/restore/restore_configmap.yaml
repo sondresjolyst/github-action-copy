@@ -1,0 +1,15 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: ${BACKUP_NAME}-configmaps
+  namespace: velero
+spec:
+  backupName: ${BACKUP_NAME}
+  includedNamespaces:
+  - '*'
+  includedResources:
+  - 'configmaps'
+  labelSelector:
+    matchExpressions:
+    - {key: radix-app, operator: Exists}
+    - {key: radix-app, operator: NotIn, values: [canarycicd-test1,canarycicd-test2,canarycicd-test3,canarycicd-test4]}
