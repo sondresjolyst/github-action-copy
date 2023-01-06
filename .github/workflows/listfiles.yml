@@ -60,7 +60,6 @@ jobs:
       radix_environment: ${{ matrix.radix_environment }}
       terraform_version: ~1.3.0
       working_directory: terraform/clusters/${{ matrix.radix_environment }}/${{ matrix.filename }}
-      token: ${{ github.token }}
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
