@@ -68,6 +68,13 @@ jobs:
     needs: [Terraform]
     name: Add PR comment
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tf-wd: ${{ needs.Terraform.outputs.tf-wd }}
+        tf-fmt: ${{ needs.Terraform.outputs.tf-fmt }}
+        tf-init: ${{ needs.Terraform.outputs.tf-init }}
+        tf-validate: ${{ needs.Terraform.outputs.tf-validate }}
+        tf-plan: ${{ needs.Terraform.outputs.tf-plan }}
     steps:
       - name: Add PR comment
         uses: peter-evans/create-or-update-comment@v2
@@ -75,17 +82,17 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            #### Directory: \`${{ needs.Terraform.outputs.tf-wd }}\`
-            #### Terraform Format and Style 🖌\`${{ needs.Terraform.outputs.tf-fmt }}\`
-            #### Terraform Initialization ⚙️\`${{ needs.Terraform.outputs.tf-init }}\`
-            #### Terraform Validation 🤖${{ needs.Terraform.outputs.tf-validate }}
-            #### Terraform Plan 📖\`${{ needs.Terraform.outputs.tf-plan }}\`
+            #### Directory: \`${{ matrixtf-wd }}\`
+            #### Terraform Format and Style 🖌\`${{ matrixtf-fmt }}\`
+            #### Terraform Initialization ⚙️\`${{ matrixtf-init }}\`
+            #### Terraform Validation 🤖${{ matrixtf-validate }}
+            #### Terraform Plan 📖\`${{ matrixtf-plan }}\`
 
             <details><summary>Show Plan</summary>
 
-            \`\`\`${{ needs.Terraform.outputs.tf-plan }}\`\`\`
+            \`\`\`${{ matrixtf-plan }}\`\`\`
 
             </details>
 
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ needs.Terraform.outputs.tf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ matrixtf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
       
