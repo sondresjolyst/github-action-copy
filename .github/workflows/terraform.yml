@@ -108,26 +108,35 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan --var-file=../../../radix-zone/radix_zone_dev.tfvars -lock=false
 
+      # - name: Add PR comment
+      #   uses: peter-evans/create-or-update-comment@v2
+      #   if: github.event_name == 'pull_request'
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body: |
+      #       #### Directory: \`${{ inputs.working_directory }}\`
+      #       #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+      #       #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+      #       #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
+      #       #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+      #       <details><summary>Show Plan</summary>
+
+      #       \`\`\`${{ steps.plan.outputs.stdout }}\`\`\`
+
+      #       </details>
+
+      #       *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ inputs.working_directory }}\`, Workflow: \`${{ github.workflow }}\`*`
+      
       - name: Add PR comment
         uses: peter-evans/create-or-update-comment@v2
         if: github.event_name == 'pull_request'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            #### Directory: \`${{ inputs.working_directory }}\`
-            #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`${{ steps.plan.outputs.stdout }}\`\`\`
-
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ inputs.working_directory }}\`, Workflow: \`${{ github.workflow }}\`*`
-
+            ```
+            test
+            ```
       # - name: Terraform Apply
       #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
       #   run: terraform apply --var-file=../../../radix-zone/radix_zone_dev.tfvars -auto-approve -lock=false
