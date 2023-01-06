@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "terraform/clusters/**"
   pull_request:
     types: [labeled, opened, synchronize, reopened]
 jobs:
@@ -12,26 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       radix_environment: ${{ steps.radix_environment.outputs.radix_environment }}
+    env:
+      path: terraform/clusters
     steps:
-      - id: radix_environment
-        # Set radix_environment based on label
-        run: |
-          labels="$(echo '${{ toJson(github.event.pull_request.labels.*.name) }}' | jq -c)"
-          if [[ "$(echo "$labels" | jq -e '. | any(. == "dev")')" == true ]]; then
-            echo "radix_environment=dev" >> $GITHUB_OUTPUT
-          elif [[ "$(echo "$labels" | jq -e '. | any(. == "prod")')" == true ]]; then
-            echo "radix_environment=prod" >> $GITHUB_OUTPUT
-          else
-            echo "radix_environment=dev" >> $GITHUB_OUTPUT            
-          fi
+      - uses: actions/checkout@v3
+      - id: set-matrix
+        run: echo "radix_environment=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+
   test:
+    needs: Get_radix_environment
     name: Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        radix_environment: ${{ fromJson(needs.Get_radix_environment.outputs.radix_environment) }}
     steps:
       - id: test
         run: |
-          output="$(echo '${{ toJson(github) }}')"
-          echo "$output" | jq
+          echo "${{ matrix.filename }}"
   # List_files:
   #   needs: Get_radix_environment
   #   name: List files
