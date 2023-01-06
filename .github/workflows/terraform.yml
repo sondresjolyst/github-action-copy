@@ -30,11 +30,6 @@ on:
         required: false
         default: '.'
 
-      token:
-        description: github token
-        type: string
-        required: true
-
     secrets:
       AZURE_CLIENT_ID:
         description: The client ID of the Azure AD service principal to use for authenticating to Azure.
@@ -46,6 +41,10 @@ on:
 
       AZURE_TENANT_ID:
         description: The ID of the Azure tenant to create the resources in.
+        required: true
+
+      token:
+        description: github token
         required: true
 
 jobs:
@@ -117,7 +116,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.token }}
           body: |
             test
 
