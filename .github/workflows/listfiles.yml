@@ -82,17 +82,17 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            #### Directory: \`${{ matrixtf-wd }}\`
-            #### Terraform Format and Style 🖌\`${{ matrixtf-fmt }}\`
-            #### Terraform Initialization ⚙️\`${{ matrixtf-init }}\`
-            #### Terraform Validation 🤖${{ matrixtf-validate }}
-            #### Terraform Plan 📖\`${{ matrixtf-plan }}\`
+            #### Directory: \`${{ matrix.tf-wd }}\`
+            #### Terraform Format and Style 🖌\`${{ matrix.tf-fmt }}\`
+            #### Terraform Initialization ⚙️\`${{ matrix.tf-init }}\`
+            #### Terraform Validation 🤖${{ matrix.tf-validate }}
+            #### Terraform Plan 📖\`${{ matrix.tf-plan }}\`
 
             <details><summary>Show Plan</summary>
 
-            \`\`\`${{ matrixtf-plan }}\`\`\`
+            \`\`\`${{ matrix.tf-plan }}\`\`\`
 
             </details>
 
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ matrixtf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ matrix.tf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
       
