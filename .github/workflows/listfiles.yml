@@ -60,39 +60,8 @@ jobs:
       radix_environment: ${{ matrix.radix_environment }}
       terraform_version: ~1.3.0
       working_directory: terraform/clusters/${{ matrix.radix_environment }}/${{ matrix.filename }}
+      token: ${{ github.token }}
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  Add_PR_Comment:
-    needs: [Terraform]
-    name: Add PR comment
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tf-wd: ${{ needs.Terraform.outputs.tf-wd }}
-        tf-fmt: ${{ needs.Terraform.outputs.tf-fmt }}
-        tf-init: ${{ needs.Terraform.outputs.tf-init }}
-        tf-validate: ${{ needs.Terraform.outputs.tf-validate }}
-        tf-plan: ${{ needs.Terraform.outputs.tf-plan }}
-    steps:
-      - name: Add PR comment
-        uses: peter-evans/create-or-update-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            #### Directory: \`${{ matrix.tf-wd }}\`
-            #### Terraform Format and Style 🖌\`${{ matrix.tf-fmt }}\`
-            #### Terraform Initialization ⚙️\`${{ matrix.tf-init }}\`
-            #### Terraform Validation 🤖${{ matrix.tf-validate }}
-            #### Terraform Plan 📖\`${{ matrix.tf-plan }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`${{ matrix.tf-plan }}\`\`\`
-
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ matrix.tf-wd }}\`, Workflow: \`${{ github.workflow }}\`*`
-      

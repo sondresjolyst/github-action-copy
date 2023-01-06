@@ -30,6 +30,11 @@ on:
         required: false
         default: '.'
 
+      token:
+        description: github token
+        type: string
+        required: true
+
     secrets:
       AZURE_CLIENT_ID:
         description: The client ID of the Azure AD service principal to use for authenticating to Azure.
@@ -42,18 +47,6 @@ on:
       AZURE_TENANT_ID:
         description: The ID of the Azure tenant to create the resources in.
         required: true
-
-    outputs:
-      tf-wd: 
-        value: ${{ inputs.working_directory }}
-      tf-fmt: 
-        value: ${{ jobs.Terraform.outputs.tf-fmt }}
-      tf-init: 
-        value: ${{ jobs.Terraform.outputs.tf-init }}
-      tf-validate: 
-        value: ${{ jobs.Terraform.outputs.tf-validate }}
-      tf-plan: 
-        value: ${{ jobs.Terraform.outputs.tf-plan }}
 
 jobs:
   Terraform:
@@ -89,12 +82,6 @@ jobs:
       resource_group_name: s941-tfstate
       storage_account_name: radixinfra${{ inputs.radix_environment }}
 
-    outputs:
-      tf-fmt: ${{ steps.fmt.outcome }}
-      tf-init: ${{ steps.init.outcome }}
-      tf-validate: ${{ steps.validate.outputs.stdout }}
-      tf-plan: ${{ steps.plan.outcome }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -125,6 +112,13 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan --var-file=../../../radix-zone/radix_zone_dev.tfvars -lock=false
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            test
 
       # - name: Terraform Apply
       #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
