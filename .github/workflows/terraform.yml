@@ -113,11 +113,11 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -lock=false
+        run: terraform plan --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -lock=false -no-color
 
-      - name: Terraform Apply
-        if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
-        run: terraform apply --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -auto-approve -lock=false
+      # - name: Terraform Apply
+      #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
+      #   run: terraform apply --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -auto-approve -lock=false
   Create_comment:
     needs: [Terraform]
     name: Create comment

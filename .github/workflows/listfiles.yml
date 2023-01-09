@@ -20,17 +20,6 @@ jobs:
       - uses: actions/checkout@v3
       - id: set-matrix
         run: echo "radix_environment=$(ls ${{ env.path }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
-  # test:
-  #   needs: Get_radix_environment
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       radix_environment: ${{ fromJson(needs.Get_radix_environment.outputs.radix_environment) }}
-  #   steps:
-  #     - id: test
-  #       run: |
-  #         echo "${{ matrix.radix_environment }}"
   List_files:
     needs: Get_radix_environment
     name: List files
@@ -64,13 +53,3 @@ jobs:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  # comment:
-  #   needs: Get_radix_environment
-  #   name: comment
-  #   uses: ./.github/workflows/test.yml
-  #   strategy:
-  #     matrix:
-  #       radix_environment: ${{ fromJson(needs.Get_radix_environment.outputs.radix_environment) }}
-  #   with:
-  #     radix_environment: ${{ matrix.radix_environment }}
-
