@@ -45,10 +45,12 @@ fi
 printf ""
 
 out=()
-out+=(${createArr[@]})
-out+=(${destroyArr[@]})
-out+=(${updateArr[@]})
+out+=("${createArr[@]}")
+out+=("${destroyArr[@]}")
+out+=("${updateArr[@]}")
 
-JSON="[$(echo $out | sed 's/ /, /g')]"
+foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
 
-echo "stdout=$JSON" >> $GITHUB_OUTPUT
+# JSON="[$(echo $out | sed 's/ /, /g')]"
+
+echo "stdout=$foo" >> $GITHUB_OUTPUT
