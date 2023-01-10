@@ -8,18 +8,13 @@ createArr=()
 destroyArr=()
 updateArr=()
 
-red=$'\e[1;31m'
-grn=$'\e[1;32m'
-yel=$'\e[1;33m'
-normal=$(tput sgr0)
-
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
-    createArr+=("${line//"# "/"${grn}+ ${normal}"}")
+    createArr+=("${line//"# "/"+ "}")
   elif [[ $line =~ "will be destroyed" ]]; then
-    destroyArr+=("${line//"# "/"${red}- ${normal}"}")
+    destroyArr+=("${line//"# "/"- "}")
   elif [[ $line =~ "will be updated in-place" ]]; then
-    updateArr+=("${line//"# "/"${yel}~ ${normal}"}")
+    updateArr+=("${line//"# "/"~ "}")
   fi
 done <<<"$tfplan"
 
@@ -27,24 +22,24 @@ numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
 if [ ${#createArr[@]} -gt 0 ]; then
   printf ""
-  printf "%sThe following resources will be created%s\n" "${grn}" "${normal}"
+  printf "  The following resources will be created\n"
   printf "  %s\n" "${createArr[@]}"
 fi
 
 if [ ${#destroyArr[@]} -gt 0 ]; then
   printf ""
-  printf "  %sThe following resources will be destroyed%s\n" "${red}" "${normal}"
-  "${destroyArr[@]}"
+  printf "  The following resources will be destroyed\n"
+  printf "  %s\n" "${destroyArr[@]}"
 fi
 
 if [ ${#updateArr[@]} -gt 0 ]; then
   printf ""
-  printf "  %sThe following resources will be updated%s\n" "${yel}" "${normal}"
-  "${updateArr[@]}"
+  printf "  The following resources will be updated\n"
+  printf "  %s\n" "${updateArr[@]}"
 fi
 
 if [ ${#numberOfChanges[@]} -eq 0 ]; then
   printf ""
-  printf "%sNo changes. Your infrastructure matches the configuration.%s\n" "${grn}" "${normal}"
+  printf "No changes. Your infrastructure matches the configuration.\n"
 fi
 printf ""
