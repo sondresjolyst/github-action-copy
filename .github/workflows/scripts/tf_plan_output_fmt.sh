@@ -44,6 +44,6 @@ if [ ${#numberOfChanges[@]} -eq 0 ]; then
 fi
 printf ""
 
-outputArr=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
+# outputArr=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
-echo "stdout=${outputArr[*]}" >> $GITHUB_OUTPUT
+echo "stdout=foo" >> $GITHUB_OUTPUT
