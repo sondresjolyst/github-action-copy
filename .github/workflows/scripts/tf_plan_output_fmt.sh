@@ -22,19 +22,19 @@ numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
 if [ ${#createArr[@]} -gt 0 ]; then
   printf ""
-  printf "  The following resources will be created\n"
+  printf "The following resources will be created\n"
   printf "  %s\n" "${createArr[@]}"
 fi
 
 if [ ${#destroyArr[@]} -gt 0 ]; then
   printf ""
-  printf "  The following resources will be destroyed\n"
+  printf "The following resources will be destroyed\n"
   printf "  %s\n" "${destroyArr[@]}"
 fi
 
 if [ ${#updateArr[@]} -gt 0 ]; then
   printf ""
-  printf "  The following resources will be updated\n"
+  printf "The following resources will be updated\n"
   printf "  %s\n" "${updateArr[@]}"
 fi
 
@@ -43,3 +43,11 @@ if [ ${#numberOfChanges[@]} -eq 0 ]; then
   printf "No changes. Your infrastructure matches the configuration.\n"
 fi
 printf ""
+
+createArr=()
+destroyArr=()
+updateArr=()
+
+outputArr=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
+
+echo "stdout=${outputArr[*]}" >> "$GITHUB_OUTPUT"
