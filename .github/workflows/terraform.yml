@@ -116,7 +116,7 @@ jobs:
         if: github.event_name == 'pull_request'
         # run: terraform plan --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -lock=false -no-color
         # run: ${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color 
-        run: echo "stdout=asd" >>> $GITHUB_OUTPUT
+        run: echo "stdout=asd" >> $GITHUB_OUTPUT
         # run: echo "stdout=$(${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color)" >> $GITHUB_OUTPUT        
       
       # - name: Terraform Apply
