@@ -82,7 +82,8 @@ jobs:
       tf-fmt: ${{ steps.fmt.outcome }}
       tf-init: ${{ steps.init.outcome }}
       tf-validate: ${{ steps.validate.outputs.stdout }}
-      tf-plan: ${{ steps.plan.outcome }}
+      # tf-plan: ${{ steps.plan.outcome }}
+      tf-plan: ${{ steps.plan.outputs.stdout }}
       tf-planstdout: ${{ steps.plan.outputs.stdout }}
 
     steps:
