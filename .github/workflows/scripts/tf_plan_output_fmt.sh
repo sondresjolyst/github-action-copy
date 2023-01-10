@@ -50,4 +50,4 @@ updateArr=()
 
 outputArr=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
-echo "stdout=${outputArr[*]}" >> "$GITHUB_OUTPUT"
+echo "stdout=asd" >> $GITHUB_OUTPUT

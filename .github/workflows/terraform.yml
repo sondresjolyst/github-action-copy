@@ -115,8 +115,8 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         # run: terraform plan --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -lock=false -no-color
-        # run: ${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color 
-        run: echo "stdout=asd" >> $GITHUB_OUTPUT
+        run: ${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color 
+        # run: echo "stdout=asd" >> $GITHUB_OUTPUT
         # run: echo "stdout=$(${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color)" >> $GITHUB_OUTPUT        
       
       # - name: Terraform Apply
@@ -133,11 +133,11 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            #### Directory: \`${{ inputs.working_directory }}\`
-            #### Terraform Format and Style 🖌\`${{ needs.Terraform.outputs.tf-fmt }}\`
-            #### Terraform Initialization ⚙️\`${{ needs.Terraform.outputs.tf-init }}\`
-            #### Terraform Validation 🤖\`${{ needs.Terraform.outputs.tf-validate }}\`
-            #### Terraform Plan 📖\`${{ needs.Terraform.outputs.tf-plan }}\`
+            #### Directory: ${{ inputs.working_directory }}
+            #### Terraform Format and Style 🖌 ${{ needs.Terraform.outputs.tf-fmt }}
+            #### Terraform Initialization ⚙️ ${{ needs.Terraform.outputs.tf-init }}
+            #### Terraform Validation 🤖 ${{ needs.Terraform.outputs.tf-validate }}
+            #### Terraform Plan 📖 ${{ needs.Terraform.outputs.tf-plan }}
             
             <details><summary>Show Plan</summary>
             
