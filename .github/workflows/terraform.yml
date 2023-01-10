@@ -83,7 +83,7 @@ jobs:
       tf-init: ${{ steps.init.outcome }}
       tf-validate: ${{ steps.validate.outputs.stdout }}
       tf-plan: ${{ steps.plan.outcome }}
-      tf-plan-stdout: ${{ steps.plan.outputs.stdout }}
+      tf-planstdout: ${{ steps.plan.outputs.stdout }}
 
     steps:
       - name: Checkout
@@ -140,7 +140,7 @@ jobs:
             
             <details><summary>Show Plan</summary>
             
-            \`\`\`${{ needs.Terraform.outputs.tf-plan-stdout }}\`\`\`
+            \`\`\`${{ needs.Terraform.outputs.tf-planstdout }}\`\`\`
             
             </details>
             
