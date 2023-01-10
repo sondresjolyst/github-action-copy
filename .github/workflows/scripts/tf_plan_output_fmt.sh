@@ -53,4 +53,4 @@ foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
 
 # JSON="[$(echo $out | sed 's/ /, /g')]"
 sleep 10
-echo "stdout=${foo}" >> $GITHUB_OUTPUT
+echo "stdout=$(echo ${foo} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
