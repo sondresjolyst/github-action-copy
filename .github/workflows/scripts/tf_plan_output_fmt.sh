@@ -44,6 +44,11 @@ if [ ${#numberOfChanges[@]} -eq 0 ]; then
 fi
 printf ""
 
-# outputArr=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
+out=()
+out+=(${createArr[@]})
+out+=(${destroyArr[@]})
+out+=(${updateArr[@]})
 
-echo "stdout=foo" >> $GITHUB_OUTPUT
+JSON="[$(echo $out | sed 's/ /, /g')]"
+
+echo "stdout=$JSON" >> $GITHUB_OUTPUT
