@@ -52,5 +52,5 @@ out+=("${updateArr[@]}")
 foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
 
 # JSON="[$(echo $out | sed 's/ /, /g')]"
-
-echo "stdout=toJSON($foo)" >> $GITHUB_OUTPUT
+sleep 10
+echo "stdout=${foo}" >> $GITHUB_OUTPUT

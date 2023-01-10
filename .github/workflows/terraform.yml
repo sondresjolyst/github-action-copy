@@ -141,7 +141,7 @@ jobs:
             
             <details><summary>Show Plan</summary>
             
-            \`\`\`${{ needs.Terraform.outputs.tf-planstdout }}\`\`\`
+            \`\`\`${{ fromJSON(needs.Terraform.outputs.tf-planstdout) }}\`\`\`
             
             </details>
             
