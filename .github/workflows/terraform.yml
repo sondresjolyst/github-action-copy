@@ -83,7 +83,7 @@ jobs:
       tf-init: ${{ steps.init.outcome }}
       tf-validate: ${{ steps.validate.outputs.stdout }}
       # tf-plan: ${{ steps.plan.outcome }}
-      tf-planstdout: ${{ steps.plan.outputs.foo }}
+      tf-planstdout: ${{ steps.plan.outputs.tf-planstdout }}
       tf-bar: ${{ steps.plan.outputs.bar }}
 
     steps:
