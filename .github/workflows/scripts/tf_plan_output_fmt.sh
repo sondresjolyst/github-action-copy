@@ -89,13 +89,13 @@ foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be 
 
 foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
 bar=$( IFS=$'\n'; echo "${out[*]}" )
-barfoo=$(echo ${foobar} | tr '\n' ' \ ')
+barfoo=$(echo ${foobar} | tr '\n' '\\')
 # JSON="[$(echo $out | sed 's/ /, /g')]"
 
 echo "bar"
 echo "$bar"
 echo "$barfoo"
-echo "bar=${barfoo}" >> $GITHUB_OUTPUT
+echo "tf-planstdout=${barfoo}" >> $GITHUB_OUTPUT
 
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
 # echo "bar=bar" >> $GITHUB_OUTPUT
