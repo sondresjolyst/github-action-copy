@@ -131,7 +131,7 @@ jobs:
       - name: Print output
         run: |
           echo ${{ needs.Terraform.outputs.tf-planstdout }}
-          echo ${{ env.foo }}
+          echo ${{ needs.Terraform.environment.foo }}
           echo ${{ needs.Terraform.outputs.tf-bar }}
 
   Create_comment:

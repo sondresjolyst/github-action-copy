@@ -53,13 +53,6 @@ out+=("${createArr[@]}")
 out+=("${destroyArr[@]}")
 out+=("${updateArr[@]}")
 
-foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
-bar=$( IFS=$'\n'; echo "${out[*]}" )
-# JSON="[$(echo $out | sed 's/ /, /g')]"
-
-echo "bar"
-echo "$bar"
-
 foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be created
 + azurerm_private_dns_zone_virtual_network_link.cluster_link[1] will be created
 + azurerm_private_dns_zone_virtual_network_link.cluster_link[2] will be created
@@ -94,11 +87,18 @@ foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be 
 + module.aks.azurerm_virtual_network_peering.hub_to_cluster will be created
 + module.aks.random_id.four_byte will be created"
 
+foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
+bar=$( IFS=$'\n'; echo "${out[*]}" )
+barfoo=$(echo ${foobar} | tr '\n' ' ')
+# JSON="[$(echo $out | sed 's/ /, /g')]"
+
+echo "bar"
+echo "$bar"
+echo "$barfoo"
+
+
+
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
 # echo "bar=bar" >> $GITHUB_OUTPUT
 # echo "foo=$(echo "${foobar}")" >> $GITHUB_OUTPUT
-{
-  echo 'foo<<EOF'
-  echo "${foobar}"
-  echo 'EOF'
-} >> $GITHUB_ENV
+
