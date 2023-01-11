@@ -96,4 +96,4 @@ foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be 
 
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
 echo "bar=bar" >> $GITHUB_OUTPUT
-echo "foo=${foobar}" >> $GITHUB_OUTPUT
+echo "foo=$(echo ${foobar})" >> $GITHUB_OUTPUT
