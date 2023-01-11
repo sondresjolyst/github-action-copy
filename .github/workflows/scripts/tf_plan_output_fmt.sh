@@ -8,7 +8,7 @@ createArr=()
 destroyArr=()
 updateArr=()
 
-echo "1"
+# echo "1"
 
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
@@ -20,7 +20,7 @@ while read -r line; do
   fi
 done <<<"$tfplan"
 
-echo "2"
+# echo "2"
 
 numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
@@ -95,9 +95,10 @@ bar=$( IFS=$'\n'; echo "${out[*]}" )
 
 # echo "bar"
 # echo "$bar" | tr '\n' '  '
-saab=$(echo "${bar//$'\n'/$' \\ '}")
-echo "foo='${saab}'" >> $GITHUB_OUTPUT
-echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
+echo "${bar//$'\n'/$' \\ '}"
+# saab=$(echo "${bar//$'\n'/$' \\ '}")
+# echo "foo='${saab}'" >> $GITHUB_OUTPUT
+# echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
 # echo "tf-planstdout=$(echo "${bar//$'\n'/$' \\ '}")" >> $GITHUB_OUTPUT
 # echo "$barfoo"
 # echo "$barbar"
