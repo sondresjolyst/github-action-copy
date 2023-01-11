@@ -50,7 +50,8 @@ out+=("${destroyArr[@]}")
 out+=("${updateArr[@]}")
 
 foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
-
+bar=$( IFS=$'\n'; echo "${out[*]}" )
 # JSON="[$(echo $out | sed 's/ /, /g')]"
-sleep 10
-echo "stdout=$(echo ${foo} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+
+# echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
+echo "stdout=${bar}" >> $GITHUB_OUTPUT
