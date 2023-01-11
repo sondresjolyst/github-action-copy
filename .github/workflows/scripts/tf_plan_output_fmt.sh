@@ -89,21 +89,23 @@ foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be 
 
 foo=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${out[@]}")
 bar=$( IFS=$'\n'; echo "${out[*]}" )
-barbar=$(echo $bar | tr '\n' '\\')
-barfoo=$(echo ${foobar} | tr '\n' '\\')
+# barbar=$(echo $bar | tr '\n' '\\')
+# barfoo=$(echo ${foobar} | tr '\n' '\\')
 # JSON="[$(echo $out | sed 's/ /, /g')]"
 
-echo "bar"
-echo "$bar"
-echo "$barfoo"
-echo "$barbar"
-echo "tf-planstdout=$(echo "$barfoo")" >> $GITHUB_OUTPUT
+# echo "bar"
+# echo "$bar" | tr '\n' '  '
+echo "${bar//$'\n'/$' \\ '}"
+echo "tf-planstdout=$(echo "${bar//$'\n'/$' \\ '}")" >> $GITHUB_OUTPUT
+# echo "$barfoo"
+# echo "$barbar"
+# echo "tf-planstdout=$(echo "$barfoo")" >> $GITHUB_OUTPUT
 
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
 # echo "bar=bar" >> $GITHUB_OUTPUT
 # echo "foo=$(echo "${foobar}")" >> $GITHUB_OUTPUT
-{
-  echo 'foo<<EOF'
-  echo "${foobar}"
-  echo 'EOF'
-} >> $GITHUB_ENV
+# {
+#   echo 'foo<<EOF'
+#   echo "${foobar}"
+#   echo 'EOF'
+# } >> $GITHUB_ENV
