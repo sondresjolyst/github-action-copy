@@ -95,5 +95,10 @@ foobar="+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be 
 + module.aks.random_id.four_byte will be created"
 
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
-echo "bar=bar" >> $GITHUB_OUTPUT
-echo "foo=$(echo ${foobar})" >> $GITHUB_OUTPUT
+# echo "bar=bar" >> $GITHUB_OUTPUT
+# echo "foo=$(echo "${foobar}")" >> $GITHUB_OUTPUT
+{
+  echo 'foo<<EOF'
+  echo "${foobar}"
+  echo 'EOF'
+} >> $GITHUB_ENV
