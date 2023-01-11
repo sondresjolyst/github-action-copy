@@ -96,7 +96,8 @@ bar=$( IFS=$'\n'; echo "${out[*]}" )
 # echo "bar"
 # echo "$bar" | tr '\n' '  '
 saab=$(echo "${bar//$'\n'/$' \\ '}")
-echo "foo=$saab" >> $GITHUB_OUTPUT
+echo "foo='${saab}'" >> $GITHUB_OUTPUT
+echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
 # echo "tf-planstdout=$(echo "${bar//$'\n'/$' \\ '}")" >> $GITHUB_OUTPUT
 # echo "$barfoo"
 # echo "$barbar"
