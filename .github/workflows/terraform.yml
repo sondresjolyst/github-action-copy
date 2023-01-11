@@ -84,6 +84,7 @@ jobs:
       tf-validate: ${{ steps.validate.outputs.stdout }}
       # tf-plan: ${{ steps.plan.outcome }}
       tf-planstdout: ${{ steps.plan.outputs.tf-planstdout }}
+      tf-foo: ${{ steps.plan.outputs.foo }}
       tf-bar: ${{ steps.plan.outputs.bar }}
 
     steps:
@@ -131,8 +132,7 @@ jobs:
       - name: Print output
         run: |
           echo ${{ needs.Terraform.outputs.tf-planstdout }}
-          echo ${{ needs.Terraform.environment.foo }}
-          echo ${{ needs.Terraform.outputs.tf-bar }}
+          echo ${{ needs.Terraform.outputs.tf-foo }}
 
   Create_comment:
     needs: [Terraform]
