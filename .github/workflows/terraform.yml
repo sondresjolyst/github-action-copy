@@ -140,9 +140,7 @@ jobs:
             #### Terraform Plan 📖 ${{ needs.Terraform.outputs.tf-plan }}
             
             <details><summary>Show Plan</summary>
-            
-            \`\`\`${{ fromJSON(needs.Terraform.outputs.tf-planstdout) }}\`\`\`
-            \`\`\`${{ toJSON(needs.Terraform.outputs.tf-planstdout) }}\`\`\`
+
             \`\`\`${{ needs.Terraform.outputs.tf-planstdout }}\`\`\`
             
             </details>
