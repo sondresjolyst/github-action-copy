@@ -54,4 +54,4 @@ bar=$( IFS=$'\n'; echo "${out[*]}" )
 # JSON="[$(echo $out | sed 's/ /, /g')]"
 
 # echo "stdout=$(echo ${foo})" >> $GITHUB_OUTPUT
-echo "stdout=${bar}" >> $GITHUB_OUTPUT
+echo "foo=${bar}" >> $GITHUB_OUTPUT
