@@ -96,7 +96,7 @@ bar=$( IFS=$'\n'; echo "${out[*]}" )
 # echo "bar"
 # echo "$bar" | tr '\n' '  '
 echo "${bar//$'\n'/$' \\ '}"
-echo "foo=foo" >> $GITHUB_OUTPUT
+echo "foo=${bar//$'\n'/$' \\ '}" >> $GITHUB_OUTPUT
 echo "tf-planstdout=$(echo "${bar//$'\n'/$' \\ '}")" >> $GITHUB_OUTPUT
 # echo "$barfoo"
 # echo "$barbar"
