@@ -9,9 +9,11 @@ createArr=()
 destroyArr=()
 updateArr=()
 out=()
+test=()
 
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
+    test+=("a")
     createArr+=("${line//"# "/"+ "}")
   elif [[ $line =~ "will be destroyed" ]]; then
     destroyArr+=("${line//"# "/"- "}")
@@ -50,7 +52,7 @@ done <<<"$tfplan"
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
 # rm out.txt
-echo "${createArr[@]}" | tr -d '\n' > out.txt
+echo "${test[@]}" | tr -d '\n' > out.txt
 # echo "SAAB900Turbo 1985" > out.txt
 foo=$(cat out.txt)
 
