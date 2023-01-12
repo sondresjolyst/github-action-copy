@@ -23,6 +23,10 @@ while read -r line; do
   fi
 done <<<"$tfplan"
 
+echo "--"
+echo "${createArr[@]}"
+echo "--"
+
 # numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
 # if [ ${#createArr[@]} -gt 0 ]; then
