@@ -13,6 +13,7 @@ test=()
 
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
+    echo "${line}"
     test+=("${line}")
     createArr+=("${line//"# "/"+ "}")
   elif [[ $line =~ "will be destroyed" ]]; then
