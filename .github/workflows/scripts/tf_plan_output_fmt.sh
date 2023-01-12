@@ -50,8 +50,8 @@ done <<<"$tfplan"
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
 # rm out.txt
-# echo "${out[@]}" | tr -d '\n' > out.txt
-echo "SAAB900Turbo 1985" > out.txt
+echo "${out[@]}" | tr -d '\n' > out.txt
+# echo "SAAB900Turbo 1985" > out.txt
 foo=$(cat out.txt)
 
 echo "--"
