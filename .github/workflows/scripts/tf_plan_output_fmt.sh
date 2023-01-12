@@ -14,17 +14,16 @@ test=()
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
     echo "${line}"
-    test+=("${line}")
     createArr+=("${line//"# "/"+ "}")
   elif [[ $line =~ "will be destroyed" ]]; then
     destroyArr+=("${line//"# "/"- "}")
   elif [[ $line =~ "will be updated in-place" ]]; then
     updateArr+=("${line//"# "/"~ "}")
   fi
-done <<<"$tfplan"
+done < <(echo "${tfplan}")
 
 echo "--"
-echo "${test[*]}"
+echo "${createArr[@]}"
 echo "--"
 
 # numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
@@ -56,25 +55,25 @@ echo "--"
 
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
-# rm out.txt
-echo "${test[@]}" | tr -d '\n' > out.txt
-# echo "SAAB900Turbo 1985" > out.txt
-foo=$(cat out.txt)
+# # rm out.txt
+# echo "${test[@]}" | tr -d '\n' > out.txt
+# # echo "SAAB900Turbo 1985" > out.txt
+# foo=$(cat out.txt)
 
-echo "--"
-echo "${foo}"
+# echo "--"
+# echo "${foo}"
 
-echo "--"
-ls
+# echo "--"
+# ls
 
-echo "--"
-ls ..
+# echo "--"
+# ls ..
 
-echo "--"
-ls /
+# echo "--"
+# ls /
 
-echo "--"
-echo "tfplan ${tfplan}"
+# echo "--"
+# echo "tfplan ${tfplan}"
 
 # echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
 # echo "tf-plan-output=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" >> $GITHUB_OUTPUT # works
