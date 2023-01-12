@@ -21,8 +21,6 @@ while read -r line; do
   fi
 done < <(echo "${tfplan}")
 
-printf "%s\n" "${foo[@]}"
-
 # numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
 # if [ ${#createArr[@]} -gt 0 ]; then
@@ -51,6 +49,7 @@ printf "%s\n" "${foo[@]}"
 
 
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
+printf "%s\n" "${out[@]}"
 
 # # rm out.txt
 # echo "${test[@]}" | tr -d '\n' > out.txt
