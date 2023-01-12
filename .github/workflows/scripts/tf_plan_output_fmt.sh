@@ -9,12 +9,14 @@ createArr=()
 destroyArr=()
 updateArr=()
 out=()
-test=()
 
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
     echo "${line}"
     createArr+=("${line//"# "/"+ "}")
+    echo "--"
+    echo "${createArr[@]}"
+    echo "--"
   elif [[ $line =~ "will be destroyed" ]]; then
     destroyArr+=("${line//"# "/"- "}")
   elif [[ $line =~ "will be updated in-place" ]]; then
