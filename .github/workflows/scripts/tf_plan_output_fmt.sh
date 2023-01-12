@@ -12,11 +12,11 @@ out=()
 
 while read -r line; do
   if [[ $line =~ "will be created" ]]; then
-    createArr+=("${line//"# "/"+ "} \\")
+    createArr+=("${line//"# "/"+ "}")
   elif [[ $line =~ "will be destroyed" ]]; then
-    destroyArr+=("${line//"# "/"- "} \\")
+    destroyArr+=("${line//"# "/"- "}")
   elif [[ $line =~ "will be updated in-place" ]]; then
-    updateArr+=("${line//"# "/"~ "} \\")
+    updateArr+=("${line//"# "/"~ "}")
   fi
 done <<<"$tfplan"
 
