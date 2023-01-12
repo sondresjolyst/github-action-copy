@@ -10,18 +10,19 @@ tfplan=$(terraform -chdir="$path" plan "${arg[@]}")
 # updateArr=()
 # out=()
 
-foo=()
+# foo=()
 
 while read -r line; do
-  if [[ -z $line ]]; then continue; fi
-  if [[ $line =~ "will be created" ]]; then
-    echo "${line}"
-    foo+=("a")
+  echo "$line"
+  # if [[ -z $line ]]; then continue; fi
+  # if [[ $line =~ "will be created" ]]; then
+  #   echo "${line}"
+  #   foo+=("a")
     # createArr+=("${line//"# "/"+ "}")
     # echo "--createArr loop--"
     # echo "${createArr[@]}"
     # echo "--"
-  fi
+  # fi
   # elif [[ $line =~ "will be destroyed" ]]; then
   #   destroyArr+=("${line//"# "/"- "}")
   # elif [[ $line =~ "will be updated in-place" ]]; then
@@ -29,8 +30,8 @@ while read -r line; do
   # fi
 done < <(echo "${tfplan}")
 
-echo "--outside loop--"
-echo "${foo[@]}"
+# echo "--outside loop--"
+# echo "${foo[@]}"
 # echo "--createArr--"
 # echo "${createArr[@]}"
 # echo "--"
