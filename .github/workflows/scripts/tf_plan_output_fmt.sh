@@ -11,6 +11,7 @@ updateArr=()
 out=()
 
 while read -r line; do
+  if [[ -z $line ]]; then continue; fi
   if [[ $line =~ "will be created" ]]; then
     echo "${line}"
     createArr+=("${line//"# "/"+ "}")
