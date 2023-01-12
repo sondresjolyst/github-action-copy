@@ -49,8 +49,8 @@ done <<<"$tfplan"
 
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 
-rm out.txt
-# echo "${out[@]}" >> out.txt
-cat out.txt
+# rm out.txt
+echo "${out[@]}" | tr -d '\n' > out.txt
+# cat out.txt
 
 echo "tf-planstdout=$(cat out.txt)" >> $GITHUB_OUTPUT
