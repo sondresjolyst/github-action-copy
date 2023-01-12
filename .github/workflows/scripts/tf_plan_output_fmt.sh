@@ -14,7 +14,7 @@ while read -r line; do
   if [[ $line =~ "will be created" ]]; then
     echo "${line}"
     createArr+=("${line//"# "/"+ "}")
-    echo "--"
+    echo "--createArr loop--"
     echo "${createArr[@]}"
     echo "--"
   elif [[ $line =~ "will be destroyed" ]]; then
@@ -24,7 +24,7 @@ while read -r line; do
   fi
 done < <(echo "${tfplan}")
 
-echo "--"
+echo "--createArr--"
 echo "${createArr[@]}"
 echo "--"
 
