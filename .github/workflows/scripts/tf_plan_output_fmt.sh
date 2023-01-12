@@ -50,6 +50,8 @@ done < <(echo "${tfplan}")
 
 out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 printf "%s\n" "${out[@]}"
+echo "--"
+echo "${out[@]}"
 
 # # rm out.txt
 # echo "${test[@]}" | tr -d '\n' > out.txt
