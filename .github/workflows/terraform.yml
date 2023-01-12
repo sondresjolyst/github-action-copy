@@ -67,7 +67,7 @@ jobs:
     # Configure OIDC authentication to Azure using environment variables.
     # Required by the AzureRM backend and provider.
     env:
-      root_src: "../../../../"
+      root_src: '../../../../'
       ARM_USE_OIDC: true
       ARM_USE_AZUREAD: true
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -115,7 +115,7 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: ${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color
-      
+
       # - name: Terraform Apply
       #   if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'schedule'
       #   run: terraform apply --var-file=../../../radix-zone/radix_zone_${{ inputs.radix_environment }}.tfvars -auto-approve -lock=false
@@ -145,10 +145,9 @@ jobs:
             #### Terraform Initialization ⚙️ ${{ needs.Terraform.outputs.tf-init }}
             #### Terraform Validation 🤖 ${{ needs.Terraform.outputs.tf-validate }}
             #### Terraform Plan 📖 ${{ needs.Terraform.outputs.tf-plan }}
-            
+
             <details><summary>Show Plan</summary>
 
             \`\`\`${{ needs.Terraform.outputs.tf-planstdout }}\`\`\`
-            
+
             </details>
-            
