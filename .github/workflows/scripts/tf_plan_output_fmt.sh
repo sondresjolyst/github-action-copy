@@ -53,7 +53,7 @@ out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 echo "${out[@]}" | tr -d '\n' > out.txt
 foo=$(cat out.txt)
 
-echo "${foo}"
+echo "fooooooo ${foo}"
 
 ls
 
