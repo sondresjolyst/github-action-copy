@@ -55,6 +55,8 @@ foo=$(cat out.txt)
 
 echo "${foo}"
 
+ls
+
 # echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
 # echo "tf-planstdout=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" >> $GITHUB_OUTPUT # works
 # echo "tf-planstdout=$(echo "+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be created \ ")" >> $GITHUB_OUTPUT # works
