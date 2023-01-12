@@ -53,4 +53,4 @@ out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 echo "${out[@]}" | tr -d '\n' > out.txt
 cat out.txt
 
-echo "tf-planstdout="$(cat out.txt)"" >> $GITHUB_OUTPUT
+echo "tf-planstdout=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" >> $GITHUB_OUTPUT
