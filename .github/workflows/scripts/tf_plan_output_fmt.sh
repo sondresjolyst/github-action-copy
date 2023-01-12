@@ -54,4 +54,4 @@ echo "${out[@]}" | tr -d '\n' > out.txt
 cat out.txt
 
 # echo "tf-planstdout=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" >> $GITHUB_OUTPUT # works
-echo "tf-planstdout=$(echo "${out[@]}" | tr -d '\n')" >> $GITHUB_OUTPUT
+echo "tf-planstdout=$(echo "+ azurerm_private_dns_zone_virtual_network_link.cluster_link[0] will be created \ ")" >> $GITHUB_OUTPUT
