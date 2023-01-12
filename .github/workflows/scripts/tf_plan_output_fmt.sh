@@ -54,10 +54,16 @@ out+=("${createArr[@]}" "${destroyArr[@]}" "${updateArr[@]}")
 echo "SAAB900Turbo 1985" > out.txt
 foo=$(cat out.txt)
 
+echo "--"
 echo "fooooooo ${foo}"
 
+echo "--"
 ls
 
+echo "--"
+ls ..
+
+echo "--"
 echo "tfplan ${tfplan}"
 
 # echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
