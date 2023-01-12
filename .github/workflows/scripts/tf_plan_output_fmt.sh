@@ -64,6 +64,9 @@ echo "--"
 ls ..
 
 echo "--"
+ls /
+
+echo "--"
 echo "tfplan ${tfplan}"
 
 # echo "random-id=$(echo $RANDOM)" >> $GITHUB_OUTPUT
