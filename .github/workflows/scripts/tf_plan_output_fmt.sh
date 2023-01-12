@@ -10,10 +10,10 @@ tfplan=$(terraform -chdir="$path" plan "${arg[@]}")
 # updateArr=()
 # out=()
 
-# foo=()
+foo=()
 
 while read -r line; do
-  echo "$line"
+  foo+=("$(echo "$line")")
   # if [[ -z $line ]]; then continue; fi
   # if [[ $line =~ "will be created" ]]; then
   #   echo "${line}"
@@ -29,6 +29,8 @@ while read -r line; do
   #   updateArr+=("${line//"# "/"~ "}")
   # fi
 done < <(echo "${tfplan}")
+
+printf "%s\n" "${foo[@]}"
 
 # echo "--outside loop--"
 # echo "${foo[@]}"
