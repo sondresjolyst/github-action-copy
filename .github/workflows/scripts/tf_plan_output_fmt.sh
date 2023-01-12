@@ -24,7 +24,7 @@ while read -r line; do
 done <<<"$tfplan"
 
 echo "--"
-echo "${createArr[@]}"
+echo "${test[@]}"
 echo "--"
 
 # numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
