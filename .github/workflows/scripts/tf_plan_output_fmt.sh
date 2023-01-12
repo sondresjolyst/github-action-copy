@@ -28,6 +28,10 @@ echo "--createArr--"
 echo "${createArr[@]}"
 echo "--"
 
+echo "--tfplan--"
+echo "${tfplan}"
+echo "--"
+
 # numberOfChanges="${#createArr[@]} + ${#destroyArr[@]} + ${#updateArr[@]}"
 
 # if [ ${#createArr[@]} -gt 0 ]; then
