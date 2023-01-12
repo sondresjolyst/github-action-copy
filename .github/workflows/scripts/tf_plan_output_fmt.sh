@@ -53,4 +53,4 @@ rm out.txt
 # echo "${out[@]}" >> out.txt
 cat out.txt
 
-# echo "tf-planstdout=$(cat out.txt)" >> $GITHUB_OUTPUT
+echo "tf-planstdout=$(cat out.txt)" >> $GITHUB_OUTPUT
