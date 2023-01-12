@@ -13,7 +13,7 @@ tfplan=$(terraform -chdir="$path" plan "${arg[@]}")
 foo=()
 
 while read -r line; do
-  foo+=("$(echo "$line")")
+  foo+=("$(echo "${line//"# "/"+ "}")")
   # if [[ -z $line ]]; then continue; fi
   # if [[ $line =~ "will be created" ]]; then
   #   echo "${line}"
