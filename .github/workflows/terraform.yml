@@ -114,6 +114,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
+        shell: bash
         run: ${{ env.root_src }}.github/workflows/scripts/tf_plan_output_fmt.sh ${{ inputs.working_directory }} --var-file=${{ env.root_src }}/terraform/radix-zone/radix_zone_dev.tfvars -lock=false -no-color
 
       # - name: Terraform Apply
